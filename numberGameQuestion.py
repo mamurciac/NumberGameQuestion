@@ -1,6 +1,5 @@
 import sys
 
-global maxNumberPlayers, keyBackToMenu
 maxNumberPlayers = 5
 keyBackToMenu = "-"
 
@@ -13,7 +12,7 @@ def showMenu():
     print("4. Game with Reverse Turn Directions")
     print("5. Exit")
 
-def showNumberPlayersQuestion():
+def showNumberPlayersQuestion(maxNumberPlayers, keyBackToMenu):
     print("Indicate the number of players for the game. Minimum", 2, "and Maximum", maxNumberPlayers)
     print("Use the value", keyBackToMenu, "to go back to main menu")
 
@@ -33,11 +32,11 @@ def askMenuOption():
             optionSelected = 0
     return optionSelected
 
-def askNumberPlayers():
+def askNumberPlayers(maxNumberPlayers, keyBackToMenu):
     numberPlayers = 0
     while numberPlayers not in range(2, maxNumberPlayers + 1):
         fakeClearScreen()
-        showNumberPlayersQuestion()
+        showNumberPlayersQuestion(maxNumberPlayers, keyBackToMenu)
         print("Value")
         value = sys.stdin.readline().strip()
         if value != keyBackToMenu:
@@ -54,19 +53,19 @@ programExit = False
 while programExit == False:
     optionSelected = askMenuOption()
     if optionSelected == 1:
-        numberPlayers = askNumberPlayers()
+        numberPlayers = askNumberPlayers(maxNumberPlayers, keyBackToMenu)
         if numberPlayers != keyBackToMenu:
             print("LETS PLAY")
     elif optionSelected == 2:
-        numberPlayers = askNumberPlayers()
+        numberPlayers = askNumberPlayers(maxNumberPlayers, keyBackToMenu)
         if numberPlayers != keyBackToMenu:
             print("LETS PLAY")
     elif optionSelected == 3:
-        numberPlayers = askNumberPlayers()
+        numberPlayers = askNumberPlayers(maxNumberPlayers, keyBackToMenu)
         if numberPlayers != keyBackToMenu:
             print("LETS PLAY")
     elif optionSelected == 4:
-        numberPlayers = askNumberPlayers()
+        numberPlayers = askNumberPlayers(maxNumberPlayers, keyBackToMenu)
         if numberPlayers != keyBackToMenu:
             print("LETS PLAY")
     elif optionSelected == 5:
