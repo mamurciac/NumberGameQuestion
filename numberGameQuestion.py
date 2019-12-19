@@ -1,4 +1,3 @@
-import sys
 import random
 import time
 
@@ -71,10 +70,9 @@ def askMenuOption():
     while optionSelected not in range(1, 6):
         fakeClearScreen()
         showMenu()
-        print("Option")
         #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
         try:
-            optionSelected = int(sys.stdin.readline().strip())
+            optionSelected = int(input("Option: "))
         except ValueError:
             optionSelected = 0
     return optionSelected
@@ -87,8 +85,7 @@ def askNumberPlayers(maxNumberPlayers, keyBackToMenu, keyToExit):
     while numberPlayers not in range(2, maxNumberPlayers + 1):
         fakeClearScreen()
         showNumberPlayersQuestion(maxNumberPlayers, keyBackToMenu, keyToExit)
-        print("Value")
-        value = sys.stdin.readline().strip()
+        value = input("Value (Number of Players): ")
         #First, it checks whether the value given matches or not with the keys to come back to menu or exit the game
         if value != keyBackToMenu and value != keyToExit:
             #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
@@ -111,8 +108,7 @@ def askNamePlayers(numberPlayers, normalGameInitialScore, keyBackToMenu, keyToEx
     for index in range(numberPlayers):
         fakeClearScreen()
         showNamePlayerQuestion(index + 1, keyBackToMenu, keyToExit)
-        print("Value")
-        currentPlayerName = sys.stdin.readline().strip()
+        currentPlayerName = input("Value (Name of Player): ")
         if currentPlayerName == keyBackToMenu:
             #It's convenient to assume the values are an exceptional value, to recognize the user really wants to come back to menu rather than play the game
             playerNames = []
@@ -140,8 +136,7 @@ def askNumberGenerated(playerSelected):
     #The value given by the user will be validated to verify it's an integer number
     while numberIndicated == "NaN":
         showQuestionAboutNumberGenerated(playerSelected)
-        print("Value:")
-        value = sys.stdin.readline().strip()
+        value = input("Value (Possible Number Generated): ")
         #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
         try:
             numberIndicated = int(value)
@@ -156,8 +151,7 @@ def askWhetherPlayerBelievesOrNot(answerPossibleValues, playerSelected):
     #The value given by the user will be validated to verify it's according to the possible values (Yes/No)
     while answer not in answerPossibleValues:
         showQuestionAboutAgreementAboutNumberIndicated(playerSelected)
-        print("Value:")
-        answer = sys.stdin.readline().strip().upper()
+        answer = input("Value (Yes/No): ").upper()
     return answer
 
 #In this function, it randomly will be selected the first player that starts the game
@@ -207,6 +201,7 @@ def checkGamble(playerScores, scorePenalty, playerNames, playersAliveInGame, num
         pointsLost = 1
     #Here, the player loses the points and the gamble's result is shown
     newPlayerScores[lierPlayer] -= pointsLost
+    fakeClearScreen()
     showAnswerAboutAgreementOrNoAgreement(lierPlayer, pointsLost, numberGenerated, numberProposed)
     #Here, it determines if the player that lied is out of the game according to its new score
     if newPlayerScores[lierPlayer] <= 1:
@@ -243,8 +238,7 @@ while programExit == False:
                 numberGambles = 1
                 fakeClearScreen()
                 print("The game is going to start. Press enter to continue.")
-                print("Value:")
-                sys.stdin.readline().strip()
+                input("Value (Press Enter):")
                 #The first player is selected randomly to start the game
                 numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
                 #The game will end until there is only a player alive
@@ -276,8 +270,7 @@ while programExit == False:
                     #Here, it determines whether the game continues or is over
                     if numberPlayersAlive > 1:
                         print("The next gamble is going to start. Press enter to continue.")
-                        print("Value:")
-                        sys.stdin.readline().strip()
+                        input("Value (Press Enter):")
                     else:
                         print("The game is finished.")
                         nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
@@ -285,8 +278,7 @@ while programExit == False:
                         print("All Scores:", playerScores)
                         print("Number Gambles:", numberGambles)
                         print("Press enter to continue.")
-                        print("Value:")
-                        sys.stdin.readline().strip()
+                        input("Value (Press Enter):")
         #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
