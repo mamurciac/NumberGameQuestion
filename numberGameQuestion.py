@@ -13,6 +13,8 @@ specialDiceValues = {66: "Sechser-Pasch", 55: "Fünfer-Pasch", 44: "Vierer-Pasch
 chanceRevealGeneratedNumber = 0.35 #Probability of a player cheats its turn (Knowing somehow the number generated)
 chanceRevealPlayerSaysRightNumberOrNot = 0.35 #Probability of a player cheats its turn (Knowing somehow whether it believes in the answer given by the previous player or not)
 
+chanceChangeTurnDirection = 0.35 #Probability of change the turns' order/direction (Just like in the UNO's game but with some probability rather than a card)
+
 #It shows the main menu
 def showMenu():
     print("Welcome to the Game")
@@ -59,6 +61,12 @@ def showAnswerAboutAgreementOrNoAgreement(nameLierPlayer, numberPointsLost, numb
     print("Number Generated:", numberGenerated)
     print("Number Proposed", numberProposed)
     print("The player", nameLierPlayer, "loses", numberPointsLost, "points")
+
+def showTurnOrderDirection(turnDirectionNormal):
+    if turnDirectionNormal == True:
+        print("The turns' order changes to Forward")
+    else:
+        print("The turns' order changes to Backward")
 
 #It "clears" the screen, actually it only prints a lot of line breaks
 def fakeClearScreen():
@@ -216,6 +224,17 @@ def getNextPlayer(playerNames, playersAliveInGame, numberPlayers, currentPlayerN
     #The next player must be alive in the game, that validation is made here
     while playersAliveInGame[numberNextPlayer] == False:
         numberNextPlayer = (numberNextPlayer + 1) % numberPlayers
+        nameNextPlayer = playerNames[numberNextPlayer]
+    return numberNextPlayer, nameNextPlayer
+
+#In this function, it determines the previous player for perform the next gamble (That next player must be alive in the game)
+#This function returns the player's number (Between 0 and numberPlayers - 1) and its name
+def getPreviousPlayer(playerNames, playersAliveInGame, numberPlayers, currentPlayerNumber):
+    numberNextPlayer = (currentPlayerNumber - 1) % numberPlayers #It will give an integer number between 0 and numberPlayers - 1 and it respect the turns' order
+    nameNextPlayer = playerNames[numberNextPlayer]
+    #The next player must be alive in the game, that validation is made here
+    while playersAliveInGame[numberNextPlayer] == False:
+        numberNextPlayer = (numberNextPlayer - 1) % numberPlayers
         nameNextPlayer = playerNames[numberNextPlayer]
     return numberNextPlayer, nameNextPlayer
 
@@ -388,12 +407,86 @@ while programExit == False:
         #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
+    #Option 4: Game with chance of change the turn's order
     elif optionSelected == 4:
+        #Before the game starts, it has to know the number of players and its names (The user may come back to menu or exit the game)
         numberPlayers = askNumberPlayers(maxNumberPlayers, keyBackToMenu, keyToExit)
         if numberPlayers != keyBackToMenu and numberPlayers != keyToExit:
             playerNames, playerScores, playersAliveInGame = askNamePlayers(numberPlayers, normalGameInitialScore, keyBackToMenu, keyToExit)
+            numberPlayersAlive = numberPlayers
+            #If the user indicated the key to exit, the program ends
             if playerNames == False:
                 programExit = True
+            else:
+                #Here the game starts
+                numberGambles = 1
+                turnDirectionNormal = True #The turns' order starts normally (True: From the first randomly selected player forward, False: From the first randomly selected player backward)
+                fakeClearScreen()
+                print("The game is going to start. Press enter to continue.")
+                input("Value (Press Enter):")
+                #The first player is selected randomly to start the game
+                numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
+                #The game will end until there is only a player alive
+                while numberPlayersAlive > 1:
+                    #Here, it's generated randomly a number according to the dices and it will be visible by two seconds
+                    fakeClearScreen()
+                    showNumberTurn(playerSelected, numberGambles)
+                    numberGenerated = getRollDices(6)
+                    print("You get the number", numberGenerated)
+                    time.sleep(2)
+                    #Here, the game asks the player to indicate the number it thinks was generated
+                    fakeClearScreen()
+                    numberProposed = askNumberGenerated(playerSelected)
+                    #Here, the next player will indicated whether it believes the answer given by the previous player or not
+                    fakeClearScreen()
+                    numberPreviousPlayer = numberPlayerSelected
+                    previousPlayer = playerSelected
+                    #Here, it applies a chance to change the turns' order
+                    if random.uniform(0, 1) < chanceChangeTurnDirection:
+                        turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
+                        showTurnOrderDirection(turnDirectionNormal)
+                        print("Press enter to continue.")
+                        input("Value (Press Enter):")
+                        fakeClearScreen()
+                    #According to turns' order, the next player (This player will answer whether believes the number indicated by the player or not) will be (True: One step forward to players' list, False: One step backward to players' list)
+                    if turnDirectionNormal == True:
+                        numberPlayerSelected, playerSelected = getNextPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
+                    else:
+                        numberPlayerSelected, playerSelected = getPreviousPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
+                    answerQuestion = askWhetherPlayerBelievesOrNot(answerPossibleValues, playerSelected)
+                    #Here, the gamble is checked to determine the player that said the truth and the player that lied (Only if the next player tells not believes the answer given), and also, the scores are updated and it checks whether the lier player is out of the game
+                    if answerQuestion == answerPossibleValues[1]:
+                        playerScores, playersAliveInGame, numberPlayersAlive = checkGamble(playerScores, normalScorePenalty, playerNames, playersAliveInGame, numberPreviousPlayer, numberPlayerSelected, numberPlayersAlive, numberGenerated, numberProposed)
+                        #Here, it applies a chance to change the turns' order
+                        if random.uniform(0, 1) < chanceChangeTurnDirection:
+                            turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
+                            showTurnOrderDirection(turnDirectionNormal)
+                            print("Press enter to continue.")
+                            input("Value (Press Enter):")
+                            fakeClearScreen()
+                        #According to turns' order, the next player (This player will roll the dices) will be (True: One step forward to players' list, False: One step backward to players' list)
+                        if turnDirectionNormal == True:
+                            numberPlayerSelected, playerSelected = getNextPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
+                        else:
+                            numberPlayerSelected, playerSelected = getPreviousPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
+                    #Here, it shows the scores updated and the players alive in the game
+                    print("Scores:", playerScores)
+                    print("List of Players Alive:", playersAliveInGame)
+                    print("Number of Players Alive:", numberPlayersAlive)
+                    numberGambles += 1
+                    #Here, it determines whether the game continues or is over
+                    if numberPlayersAlive > 1:
+                        print("The next gamble is going to start. Press enter to continue.")
+                        input("Value (Press Enter):")
+                    else:
+                        print("The game is finished.")
+                        nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
+                        print("The winner is", nameWinnerPlayer, "with", playerScores[nameWinnerPlayer], "points")
+                        print("All Scores:", playerScores)
+                        print("Number Gambles:", numberGambles)
+                        print("Press enter to continue.")
+                        input("Value (Press Enter):")
+        #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
     elif optionSelected == 5:
