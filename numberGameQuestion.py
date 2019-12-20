@@ -4,7 +4,7 @@ import time
 maxNumberPlayers = 5 #Maximum number of players allowed in any game mode
 keyBackToMenu = "-" #With this answer, if a game hasn't started, the user may come back to menu
 keyToExit = "+" #With this answer, if a game hasn't started, the user may exit the game
-answerPossibleValues = ["YES", "NO"] #With these possible answers, the game validates whether a player believes to its previous player or not
+answerPossibleValues = ["Ja", "Nein"] #With these possible answers, the game validates whether a player believes to its previous player or not
 
 normalGameInitialScore = 10 #Number of initial points for all players, in a normal game
 normalScorePenalty = {42 : 3, 21 : 2} #With these special penalties, a player loses some points in a normal game, in other case, the player loses only one point
@@ -21,80 +21,80 @@ minInitialScore = 5 #Minimum number of points to give as initial score for all p
 
 #It shows the main menu
 def showMenu():
-    print("Welcome to the Game")
-    print("Please select and option:")
-    print("1. Normal Game")
-    print("2. Customized Game")
-    print("3. Game with Trap")
-    print("4. Game with Reverse Turn Directions")
-    print("5. Exit")
+    print("Willkommen zum Spiel")
+    print("Bitte wählen Sie und Option:")
+    print("1. Normales Spiel")
+    print("2. Benutzerdefiniertes Spiel")
+    print("3. Spiel mit der Falle")
+    print("4. Spiel mit umgekehrten Abbiegerichtungen")
+    print("5. Beenden")
 
 #It shows the question to ask the number of players
 def showNumberPlayersQuestion(maxNumberPlayers, keyBackToMenu, keyToExit):
-    print("Indicate the number of players for the game. Minimum", 2, "and Maximum", maxNumberPlayers)
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Geben Sie die Anzahl der Spieler für das Spiel an. Minimum", 2, "und Maximum", maxNumberPlayers)
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the question to ask the number of faces dice (Only in Customized Mode)
 def showNumberDiceFacesQuestion(minNumberDiceFaces, maxNumberDiceFaces, keyBackToMenu, keyToExit):
-    print("Indicate the number of dice faces for the game. Minimum", minNumberDiceFaces, "and Maximum", maxNumberDiceFaces)
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Geben Sie die Anzahl der Würfelflächen für das Spiel an. Minimum", minNumberDiceFaces, "und Maximum", maxNumberDiceFaces)
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the question to ask the number of initial points to all players when the game starts (Only in Customized Mode)
 def showMinimumInitialScoreQuestion(minInitialScore, keyBackToMenu, keyToExit):
-    print("Indicate the number of initial points given for all players in the game. Minimum", minInitialScore)
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Geben Sie die Anzahl der Anfangspunkte an, die für alle Spieler im Spiel vergeben wurden. Minimum", minInitialScore)
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the question to ask the name of a player (Only the name for one player)
 def showNamePlayerQuestion(numberPlayer, keyBackToMenu, keyToExit):
-    print("Indicate the name for the player", numberPlayer)
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Geben Sie den Namen des Spielers an", numberPlayer)
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the number of gamble (Gamble #1, Gamble #2, ...) and the player's name to the correspondent turn
 def showNumberTurn(namePlayer, numberGambles):
     print("Gamble", numberGambles)
     if numberGambles == 1:
-        print("The first turn is for the player", namePlayer)
+        print("Der erste Zug ist für den Spieler", namePlayer)
     else:
-        print("The turn is for the player", namePlayer)
+        print("Der Zug ist für den Spieler", namePlayer)
 
 #It shows the question to ask the player about the number generated
 def showQuestionAboutNumberGenerated(namePlayer):
-    print("The turn is for the player", namePlayer)
-    print("Please, indicate the number generated.")
+    print("Der Zug ist für den Spieler", namePlayer)
+    print("Bitte geben Sie die generierte Nummer an.")
 
 #It shows the question to ask the player whether it believes the answer given by the previous player or not
 def showQuestionAboutAgreementAboutNumberIndicated(namePlayer):
-    print("Question for the player", namePlayer)
-    print("Do you believe that the number generated is right?")
+    print("Frage an den Spieler", namePlayer)
+    print("Glauben Sie, dass die generierte Nummer richtig ist?")
 
 #It shows the question to ask the user whether the game (Only in Customized Mode) allows cheats or not
 def showQuestionAboutAllowingCheats(keyBackToMenu, keyToExit):
-    print("The cheats are allowed?")
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Die Betrüger sind erlaubt?")
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the question to ask the user whether the game (Only in Customized Mode) allows change of turns' order or not
 def showQuestionAboutAllowingChangingTurnsOrder(keyBackToMenu, keyToExit):
-    print("The turns' order change is allowed?")
-    print("Use the value", keyBackToMenu, "to go back to main menu")
-    print("Use the value", keyToExit, "to quit the game")
+    print("Die Reihenfolge der Abbiegungen ist erlaubt?")
+    print("Verwenden Sie den Wert", keyBackToMenu, "um zum Hauptmenü zurückzukehren")
+    print("Benutze den Wert", keyToExit, "um das Spiel zu beenden")
 
 #It shows the gamble's result (Number generated, Number given and the player who loses points)
 def showAnswerAboutAgreementOrNoAgreement(nameLierPlayer, numberPointsLost, numberGenerated, numberProposed):
-    print("Surprise!!!")
+    print("Überraschung!!!")
     print("Number Generated:", numberGenerated)
     print("Number Proposed", numberProposed)
-    print("The player", nameLierPlayer, "loses", numberPointsLost, "points")
+    print("Der Spieler", nameLierPlayer, "verliert", numberPointsLost, "points")
 
 def showTurnOrderDirection(turnDirectionNormal):
     if turnDirectionNormal == True:
-        print("The turns' order changes to Forward")
+        print("Die Reihenfolge der Abbiegungen ändert sich zu Weiterleiten")
     else:
-        print("The turns' order changes to Backward")
+        print("Die Reihenfolge der Runden ändert sich in Rückwärts")
 
 #It "clears" the screen, actually it only prints a lot of line breaks
 def fakeClearScreen():
@@ -111,7 +111,7 @@ def askMenuOption():
         showMenu()
         #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
         try:
-            optionSelected = int(input("Option: "))
+            optionSelected = int(input("Möglichkeit: "))
         except ValueError:
             optionSelected = 0
     return optionSelected
@@ -124,7 +124,7 @@ def askNumberPlayers(maxNumberPlayers, keyBackToMenu, keyToExit):
     while numberPlayers not in range(2, maxNumberPlayers + 1):
         fakeClearScreen()
         showNumberPlayersQuestion(maxNumberPlayers, keyBackToMenu, keyToExit)
-        value = input("Value (Number of Players): ")
+        value = input("Wert (Anzahl der Spieler): ")
         #First, it checks whether the value given matches or not with the keys to come back to menu or exit the game
         if value != keyBackToMenu and value != keyToExit:
             #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
@@ -145,7 +145,7 @@ def askNumberDiceFaces(minNumberDiceFaces, maxNumberDiceFaces, keyBackToMenu, ke
     while numberDiceFaces not in range(minNumberDiceFaces, maxNumberDiceFaces + 1):
         fakeClearScreen()
         showNumberDiceFacesQuestion(minNumberDiceFaces, maxNumberDiceFaces, keyBackToMenu, keyToExit)
-        value = input("Value (Number of Dice Faces): ")
+        value = input("Wert (Anzahl der Würfelflächen): ")
         #First, it checks whether the value given matches or not with the keys to come back to menu or exit the game
         if value != keyBackToMenu and value != keyToExit:
             #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
@@ -166,7 +166,7 @@ def askNumberInitialPoints(minInitialScore, keyBackToMenu, keyToExit):
     while numberInitialPoints < minInitialScore:
         fakeClearScreen()
         showMinimumInitialScoreQuestion(minInitialScore, keyBackToMenu, keyToExit)
-        value = input("Value (Number of Initial Points): ")
+        value = input("Wert (Anzahl der Anfangspunkte): ")
         #First, it checks whether the value given matches or not with the keys to come back to menu or exit the game
         if value != keyBackToMenu and value != keyToExit:
             #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
@@ -189,7 +189,7 @@ def askNamePlayers(numberPlayers, normalGameInitialScore, keyBackToMenu, keyToEx
     for index in range(numberPlayers):
         fakeClearScreen()
         showNamePlayerQuestion(index + 1, keyBackToMenu, keyToExit)
-        currentPlayerName = input("Value (Name of Player): ")
+        currentPlayerName = input("Wert (Name des Spielers): ")
         if currentPlayerName == keyBackToMenu:
             #It's convenient to assume the values are an exceptional value, to recognize the user really wants to come back to menu rather than play the game
             playerNames = []
@@ -218,7 +218,7 @@ def askNumberGenerated(playerSelected):
     while numberIndicated == "NaN":
         fakeClearScreen()
         showQuestionAboutNumberGenerated(playerSelected)
-        value = input("Value (Possible Number Generated): ")
+        value = input("Wert (mögliche generierte Zahl): ")
         #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
         try:
             numberIndicated = int(value)
@@ -236,8 +236,8 @@ def askNumberGeneratedWithPossibleTrap(playerSelected, chanceRevealGeneratedNumb
         showQuestionAboutNumberGenerated(playerSelected)
         #Here, it verifies whether the player cheats in the gamble
         if random.uniform(0, 1) <= chanceRevealGeneratedNumber:
-            print("By a gossip, some player discovered that the number generated is", numberGenerated)
-        value = input("Value (Possible Number Generated): ")
+            print("Durch einen Klatsch entdeckte ein Spieler, dass die generierte Zahl", numberGenerated)
+        value = input("Wert (mögliche generierte Zahl): ")
         #It tries to extract the integer number given by user, if it isn't possible, the question will be repeated to ask a right value
         try:
             numberIndicated = int(value)
@@ -253,7 +253,7 @@ def askWhetherCheatsAllowedOrNot(answerPossibleValues, keyBackToMenu, keyToExit)
     while answer not in answerPossibleValues:
         fakeClearScreen()
         showQuestionAboutAllowingCheats(keyBackToMenu, keyToExit)
-        answer = input("Value (Yes/No): ").upper()
+        answer = input("Wert (Ja / Nein): ").upper()
         if answer == keyBackToMenu or answer == keyToExit:
             break
     return answer
@@ -266,7 +266,7 @@ def askWhetherChangingTurnsOrderAllowedOrNot(answerPossibleValues, keyBackToMenu
     while answer not in answerPossibleValues:
         fakeClearScreen()
         showQuestionAboutAllowingChangingTurnsOrder(keyBackToMenu, keyToExit)
-        answer = input("Value (Yes/No): ").upper()
+        answer = input("Wert (Ja / Nein): ").upper()
         if answer == keyBackToMenu or answer == keyToExit:
             break
     return answer
@@ -279,7 +279,7 @@ def askWhetherPlayerBelievesOrNot(answerPossibleValues, playerSelected):
     while answer not in answerPossibleValues:
         fakeClearScreen()
         showQuestionAboutAgreementAboutNumberIndicated(playerSelected)
-        answer = input("Value (Yes/No): ").upper()
+        answer = input("Wert (Ja / Nein): ").upper()
     return answer
 
 #In this function, a player will indicate whether it believes the number generated by the previous player is right or not. In this case, with certain chance, the player may know previously whether the previous player lied or not
@@ -293,10 +293,10 @@ def askWhetherPlayerBelievesOrNotWithPossibleTrap(answerPossibleValues, playerSe
         #Here, it verifies whether the player cheats in the gamble
         if random.uniform(0, 1) <= chanceRevealGeneratedNumber:
             if numberProposed <= numberGenerated:
-                print("By a gossip, some player discovered that you should believe it")
+                print("Durch einen Klatsch entdeckte ein Spieler, dass man es glauben sollte")
             else:
-                print("By a gossip, some player discovered that you shouldn't believe it")
-        answer = input("Value (Yes/No): ").upper()
+                print("Durch einen Klatsch entdeckte ein Spieler, dass man es nicht glauben sollte")
+        answer = input("Wert (Ja / Nein): ").upper()
     return answer
 
 #In this function, it randomly will be selected the first player that starts the game
@@ -366,7 +366,7 @@ def checkGamble(playerScores, scorePenalty, playerNames, playersAliveInGame, num
         else:
             newPlayersAliveInGame[numberPreviousPlayer] = False
         newNumberPlayers -= 1
-        print("The player", lierPlayer, "is out of the game")
+        print("Der Spieler", lierPlayer, "ist aus dem Spiel")
     return newPlayerScores, newPlayersAliveInGame, newNumberPlayers
 
 #In this function, it determines the player that won the game, it may be known according to the players alive in the game (The last player alive wins the game)
@@ -393,8 +393,8 @@ while programExit == False:
                 #Here the game starts
                 numberGambles = 1
                 fakeClearScreen()
-                print("The game is going to start. Press enter to continue.")
-                input("Value (Press Enter):")
+                print("Das Spiel beginnt. Drücken Sie die Eingeben, um fortzufahren.")
+                input("Wert (Drücken Sie Eingeben): ")
                 #The first player is selected randomly to start the game
                 numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
                 #The game will end until there is only a player alive
@@ -403,7 +403,7 @@ while programExit == False:
                     fakeClearScreen()
                     showNumberTurn(playerSelected, numberGambles)
                     numberGenerated = getRollDices(6)
-                    print("You get the number", numberGenerated)
+                    print("Du bekommst die Nummer", numberGenerated)
                     time.sleep(2)
                     #Here, the game asks the player to indicate the number it thinks was generated
                     fakeClearScreen()
@@ -419,22 +419,22 @@ while programExit == False:
                         playerScores, playersAliveInGame, numberPlayersAlive = checkGamble(playerScores, normalScorePenalty, playerNames, playersAliveInGame, numberPreviousPlayer, numberPlayerSelected, numberPlayersAlive, numberGenerated, numberProposed)
                         numberPlayerSelected, playerSelected = getNextPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
                     #Here, it shows the scores updated and the players alive in the game
-                    print("Scores:", playerScores)
-                    print("List of Players Alive:", playersAliveInGame)
-                    print("Number of Players Alive:", numberPlayersAlive)
+                    print("Ergebnisse:", playerScores)
+                    print("Liste der lebenden Spieler:", playersAliveInGame)
+                    print("Anzahl der lebenden Spieler:", numberPlayersAlive)
                     numberGambles += 1
                     #Here, it determines whether the game continues or is over
                     if numberPlayersAlive > 1:
-                        print("The next gamble is going to start. Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Das nächste Spiel beginnt. Drücken Sie die Eingabetaste, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
                     else:
-                        print("The game is finished.")
+                        print("Das Spiel ist beendet.")
                         nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
-                        print("The winner is", nameWinnerPlayer, "with", playerScores[nameWinnerPlayer], "points")
-                        print("All Scores:", playerScores)
-                        print("Number Gambles:", numberGambles)
-                        print("Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Der Gewinner ist", nameWinnerPlayer, "mit", playerScores[nameWinnerPlayer], "punkte")
+                        print("Alle Ergebnisse:", playerScores)
+                        print("Zahlenspiele:", numberGambles)
+                        print("Drücken Sie die Eingeben, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
         #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
@@ -467,8 +467,8 @@ while programExit == False:
                                 if answerAboutChangingTurnsOrderAllowed == answerPossibleValues[0]:
                                     turnDirectionNormal = True #The turns' order starts normally (True: From the first randomly selected player forward, False: From the first randomly selected player backward)
                                 fakeClearScreen()
-                                print("The game is going to start. Press enter to continue.")
-                                input("Value (Press Enter):")
+                                print("Das Spiel beginnt. Drücken Sie die Eingeben, um fortzufahren.")
+                                input("Wert (Drücken Sie Eingeben): ")
                                 #The first player is selected randomly to start the game
                                 numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
                                 #The game will end until there is only a player alive
@@ -477,7 +477,7 @@ while programExit == False:
                                     fakeClearScreen()
                                     showNumberTurn(playerSelected, numberGambles)
                                     numberGenerated = getRollDices(numberDiceFaces)
-                                    print("You get the number", numberGenerated)
+                                    print("Du bekommst die Nummer", numberGenerated)
                                     time.sleep(2)
                                     #Here, the game asks the player to indicate the number it thinks was generated
                                     fakeClearScreen()
@@ -496,8 +496,8 @@ while programExit == False:
                                         if random.uniform(0, 1) < chanceChangeTurnDirection:
                                             turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
                                             showTurnOrderDirection(turnDirectionNormal)
-                                            print("Press enter to continue.")
-                                            input("Value (Press Enter):")
+                                            print("Drücken Sie die Eingeben, um fortzufahren.")
+                                            input("Wert (Drücken Sie Eingeben): ")
                                             fakeClearScreen()
                                         #According to turns' order, the next player (This player will answer whether believes the number indicated by the player or not) will be (True: One step forward to players' list, False: One step backward to players' list)
                                         if turnDirectionNormal == True:
@@ -520,8 +520,8 @@ while programExit == False:
                                             if random.uniform(0, 1) < chanceChangeTurnDirection:
                                                 turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
                                                 showTurnOrderDirection(turnDirectionNormal)
-                                                print("Press enter to continue.")
-                                                input("Value (Press Enter):")
+                                                print("Drücken Sie die Eingeben, um fortzufahren.")
+                                                input("Wert (Drücken Sie Eingeben): ")
                                                 fakeClearScreen()
                                             #According to turns' order, the next player (This player will answer whether believes the number indicated by the player or not) will be (True: One step forward to players' list, False: One step backward to players' list)
                                             if turnDirectionNormal == True:
@@ -531,22 +531,22 @@ while programExit == False:
                                         else:
                                             numberPlayerSelected, playerSelected = getNextPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
                                     #Here, it shows the scores updated and the players alive in the game
-                                    print("Scores:", playerScores)
-                                    print("List of Players Alive:", playersAliveInGame)
-                                    print("Number of Players Alive:", numberPlayersAlive)
+                                    print("Ergebnisse:", playerScores)
+                                    print("Liste der lebenden Spieler:", playersAliveInGame)
+                                    print("Anzahl der lebenden Spieler:", numberPlayersAlive)
                                     numberGambles += 1
                                     #Here, it determines whether the game continues or is over
                                     if numberPlayersAlive > 1:
-                                        print("The next gamble is going to start. Press enter to continue.")
-                                        input("Value (Press Enter):")
+                                        print("Das nächste Spiel beginnt. Drücken Sie die Eingabetaste, um fortzufahren.")
+                                        input("Wert (Drücken Sie Eingeben): ")
                                     else:
-                                        print("The game is finished.")
+                                        print("Das Spiel ist beendet.")
                                         nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
-                                        print("The winner is", nameWinnerPlayer, "with", playerScores[nameWinnerPlayer], "points")
-                                        print("All Scores:", playerScores)
-                                        print("Number Gambles:", numberGambles)
-                                        print("Press enter to continue.")
-                                        input("Value (Press Enter):")
+                                        print("Der Gewinner ist", nameWinnerPlayer, "mit", playerScores[nameWinnerPlayer], "punkte")
+                                        print("Alle Ergebnisse:", playerScores)
+                                        print("Zahlenspiele:", numberGambles)
+                                        print("Drücken Sie die Eingeben, um fortzufahren.")
+                                        input("Wert (Drücken Sie Eingeben): ")
                         #If the user indicated the key to exit, the program ends
                         elif numberPlayers == keyToExit:
                             programExit = True
@@ -576,8 +576,8 @@ while programExit == False:
                 #Here the game starts
                 numberGambles = 1
                 fakeClearScreen()
-                print("The game is going to start. Press enter to continue.")
-                input("Value (Press Enter):")
+                print("Das Spiel beginnt. Drücken Sie die Eingeben, um fortzufahren.")
+                input("Wert (Drücken Sie Eingeben): ")
                 #The first player is selected randomly to start the game
                 numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
                 #The game will end until there is only a player alive
@@ -586,7 +586,7 @@ while programExit == False:
                     fakeClearScreen()
                     showNumberTurn(playerSelected, numberGambles)
                     numberGenerated = getRollDices(6)
-                    print("You get the number", numberGenerated)
+                    print("Du bekommst die Nummer", numberGenerated)
                     time.sleep(2)
                     #Here, the game asks the player to indicate the number it thinks was generated
                     fakeClearScreen()
@@ -604,22 +604,22 @@ while programExit == False:
                         playerScores, playersAliveInGame, numberPlayersAlive = checkGamble(playerScores, normalScorePenalty, playerNames, playersAliveInGame, numberPreviousPlayer, numberPlayerSelected, numberPlayersAlive, numberGenerated, numberProposed)
                         numberPlayerSelected, playerSelected = getNextPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
                     #Here, it shows the scores updated and the players alive in the game
-                    print("Scores:", playerScores)
-                    print("List of Players Alive:", playersAliveInGame)
-                    print("Number of Players Alive:", numberPlayersAlive)
+                    print("Ergebnisse:", playerScores)
+                    print("Liste der lebenden Spieler:", playersAliveInGame)
+                    print("Anzahl der lebenden Spieler:", numberPlayersAlive)
                     numberGambles += 1
                     #Here, it determines whether the game continues or is over
                     if numberPlayersAlive > 1:
-                        print("The next gamble is going to start. Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Das nächste Spiel beginnt. Drücken Sie die Eingabetaste, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
                     else:
-                        print("The game is finished.")
+                        print("Das Spiel ist beendet.")
                         nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
-                        print("The winner is", nameWinnerPlayer, "with", playerScores[nameWinnerPlayer], "points")
-                        print("All Scores:", playerScores)
-                        print("Number Gambles:", numberGambles)
-                        print("Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Der Gewinner ist", nameWinnerPlayer, "mit", playerScores[nameWinnerPlayer], "punkte")
+                        print("Alle Ergebnisse:", playerScores)
+                        print("Zahlenspiele:", numberGambles)
+                        print("Drücken Sie die Eingeben, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
         #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
@@ -638,8 +638,8 @@ while programExit == False:
                 numberGambles = 1
                 turnDirectionNormal = True #The turns' order starts normally (True: From the first randomly selected player forward, False: From the first randomly selected player backward)
                 fakeClearScreen()
-                print("The game is going to start. Press enter to continue.")
-                input("Value (Press Enter):")
+                print("Das Spiel beginnt. Drücken Sie die Eingeben, um fortzufahren.")
+                input("Wert (Drücken Sie Eingeben): ")
                 #The first player is selected randomly to start the game
                 numberPlayerSelected, playerSelected = selectFirstPlayer(playerNames, numberPlayers)
                 #The game will end until there is only a player alive
@@ -648,7 +648,7 @@ while programExit == False:
                     fakeClearScreen()
                     showNumberTurn(playerSelected, numberGambles)
                     numberGenerated = getRollDices(6)
-                    print("You get the number", numberGenerated)
+                    print("Du bekommst die Nummer", numberGenerated)
                     time.sleep(2)
                     #Here, the game asks the player to indicate the number it thinks was generated
                     fakeClearScreen()
@@ -661,8 +661,8 @@ while programExit == False:
                     if random.uniform(0, 1) < chanceChangeTurnDirection:
                         turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
                         showTurnOrderDirection(turnDirectionNormal)
-                        print("Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Drücken Sie die Eingeben, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
                         fakeClearScreen()
                     #According to turns' order, the next player (This player will answer whether believes the number indicated by the player or not) will be (True: One step forward to players' list, False: One step backward to players' list)
                     if turnDirectionNormal == True:
@@ -677,8 +677,8 @@ while programExit == False:
                         if random.uniform(0, 1) < chanceChangeTurnDirection:
                             turnDirectionNormal = not turnDirectionNormal #This value inverts it (If the value was True, then the value will be False and vice versa)
                             showTurnOrderDirection(turnDirectionNormal)
-                            print("Press enter to continue.")
-                            input("Value (Press Enter):")
+                            print("Drücken Sie die Eingeben, um fortzufahren.")
+                            input("Wert (Drücken Sie Eingeben): ")
                             fakeClearScreen()
                         #According to turns' order, the next player (This player will roll the dices) will be (True: One step forward to players' list, False: One step backward to players' list)
                         if turnDirectionNormal == True:
@@ -686,22 +686,22 @@ while programExit == False:
                         else:
                             numberPlayerSelected, playerSelected = getPreviousPlayer(playerNames, playersAliveInGame, numberPlayers, numberPlayerSelected)
                     #Here, it shows the scores updated and the players alive in the game
-                    print("Scores:", playerScores)
-                    print("List of Players Alive:", playersAliveInGame)
-                    print("Number of Players Alive:", numberPlayersAlive)
+                    print("Ergebnisse:", playerScores)
+                    print("Liste der lebenden Spieler:", playersAliveInGame)
+                    print("Anzahl der lebenden Spieler:", numberPlayersAlive)
                     numberGambles += 1
                     #Here, it determines whether the game continues or is over
                     if numberPlayersAlive > 1:
-                        print("The next gamble is going to start. Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Das nächste Spiel beginnt. Drücken Sie die Eingabetaste, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
                     else:
-                        print("The game is finished.")
+                        print("Das Spiel ist beendet.")
                         nameWinnerPlayer = getPlayerWinner(playerNames, playersAliveInGame)
-                        print("The winner is", nameWinnerPlayer, "with", playerScores[nameWinnerPlayer], "points")
-                        print("All Scores:", playerScores)
-                        print("Number Gambles:", numberGambles)
-                        print("Press enter to continue.")
-                        input("Value (Press Enter):")
+                        print("Der Gewinner ist", nameWinnerPlayer, "mit", playerScores[nameWinnerPlayer], "punkte")
+                        print("Alle Ergebnisse:", playerScores)
+                        print("Zahlenspiele:", numberGambles)
+                        print("Drücken Sie die Eingeben, um fortzufahren.")
+                        input("Wert (Drücken Sie Eingeben): ")
         #If the user indicated the key to exit, the program ends
         elif numberPlayers == keyToExit:
             programExit = True
